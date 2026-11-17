@@ -2,18 +2,36 @@ const express = require("express");
 
 const app = express();
 
-// Dynamic GET route
-app.get("/welcome/:username", (req, res) => {
-  // Extract route parameter
-  const username = req.params.username;
+// Logging Middleware
+const loggingMiddleware = (req, res, next) => {
+  console.log(`${req.method} request made to ${req.url}`);
+  next();
+};
 
-  // Extract query parameter
-  const role = req.query.role;
+// Register middleware
+app.use(loggingMiddleware);
 
-  // Send personalized response
-  res.send(`Welcome ${username}, your role is ${role}`);
+// GET /products
+app.get("/products", (req, res) => {
+  res.send("Here is the list of all products.");
 });
 
-app.listen(8080, () => {
-  console.log("Server running on http://localhost:8080");
+// POST /products
+app.post("/products", (req, res) => {
+  res.send("A new product has been added.");
+});
+
+// GET /categories
+app.get("/categories", (req, res) => {
+  res.send("Here is the list of all categories.");
+});
+
+// POST /categories
+app.post("/categories", (req, res) => {
+  res.send("A new category has been created.");
+});
+
+// Start server
+app.listen(4000, () => {
+  console.log("Server running on http://localhost:4000");
 });
