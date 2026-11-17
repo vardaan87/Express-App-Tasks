@@ -2,14 +2,14 @@ const express = require("express");
 
 const router = express.Router();
 
-// GET /products
+// GET /categories
 router.get("/", (req, res) => {
-  res.send("Here is the list of all products.");
+  res.send("Here is the list of books!");
 });
 
-// POST /products
+// POST /categories
 router.post("/", (req, res) => {
-  res.send("A new product has been added.");
+  res.send("Book has been added!");
 });
 
 module.exports = router;

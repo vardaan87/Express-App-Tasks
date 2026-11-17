@@ -1,11 +1,8 @@
 const express = require("express");
 const app = express();
-const productRouter = require("./routers/productRoute");
-const categoriesRouter = require("./routers/categoriesRoute");
+const booksRouter = require("./routers/booksRoute");
 
-app.use("/products", productRouter);
-
-app.use("/categories", categoriesRouter);
+app.use("/books", booksRouter);
 
 // Start server
 app.listen(4000, () => {
