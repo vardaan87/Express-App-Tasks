@@ -1,23 +1,16 @@
-const productService = require("../services/productService");
+const { AppError } = require("../utils/errorHandler");
 
-const getAllProducts = (req, res) => {
-  const result = productService.getAllProducts();
-  res.send(result);
-};
-
-const getProductById = (req, res) => {
+const getProductById = (req, res, next) => {
   const id = req.params.id;
-  const result = productService.getProductById(id);
-  res.send(result);
+
+  if (id === "999") {
+    return next(new AppError("Product not found", 404));
+  }
+
+  res.json({
+    success: true,
+    message: `Fetching product with ID: ${id}`,
+  });
 };
 
-const addProduct = (req, res) => {
-  const result = productService.addProduct();
-  res.send(result);
-};
-
-module.exports = {
-  getAllProducts,
-  getProductById,
-  addProduct,
-};
+module.exports = { getProductById };
